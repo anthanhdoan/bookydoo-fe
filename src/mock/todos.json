@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "title": "Create VUE app",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "title": "Set up routes",
+    "completed": false
+  },
+  {
+    "id": 3,
+    "title": "mock a db",
+    "completed": true
+  },
+  {
+    "id": 4,
+    "title": "Create add todo functionality",
+    "completed": false
+  },
+  {
+    "id": 5,
+    "title": "This one is 'completed'",
+    "completed": true
+  }
+]
