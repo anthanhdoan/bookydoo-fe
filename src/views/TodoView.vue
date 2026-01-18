@@ -99,7 +99,8 @@ provide('editTodo', editTodo)
 .todo-app {
   box-sizing: border-box;
   width: 500px;
-  background-color: #fffaf5;
+  background-color: #fff7ee;
   padding: 1rem;
+  border-right: 1px var(--color-text-accent) solid;
 }
 </style>
