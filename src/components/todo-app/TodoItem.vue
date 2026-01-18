@@ -43,17 +43,14 @@ const cancelEdit = () => {
 
   <div v-if="!isEditing" class="todo-wrapper">
     <span
+      class="todo-title"
       :class="{ completed: todo.completed }"
       @click="toggleComplete(todo.id)"
       >{{ todo.title }}</span
     >
 
     <div class="todo-buttons">
-      <IconButton
-        :variant="IconButtonVariant.EDIT"
-        class="icon-button"
-        @click="startEdit"
-      />
+      <IconButton :variant="IconButtonVariant.EDIT" class="icon-button" @click="startEdit" />
       <IconButton
         :variant="IconButtonVariant.DELETE"
         class="icon-button"
@@ -71,16 +68,8 @@ const cancelEdit = () => {
       :id="`edit-${todo.id}`"
     />
     <div class="todo-buttons">
-      <IconButton
-        :variant="IconButtonVariant.CONFIRM"
-        class="icon-button"
-        @click="saveEdit"
-      />
-      <IconButton
-        :variant="IconButtonVariant.CANCEL"
-        class="icon-button"
-        @click="cancelEdit"
-      />
+      <IconButton :variant="IconButtonVariant.CONFIRM" class="icon-button" @click="saveEdit" />
+      <IconButton :variant="IconButtonVariant.CANCEL" class="icon-button" @click="cancelEdit" />
     </div>
   </div>
 </template>
@@ -111,8 +100,10 @@ const cancelEdit = () => {
   text-decoration: line-through;
 }
 
-.todo-item span {
+.todo-title {
   flex: 1;
+  display: inline-flex;
+  align-items: center;
   margin: 0 0.5rem;
   word-break: break-word;
   cursor: pointer;
@@ -131,6 +122,7 @@ const cancelEdit = () => {
 .todo-buttons {
   margin-left: auto;
   display: flex;
+  align-items: center;
   gap: 0.3rem;
 }
 </style>
