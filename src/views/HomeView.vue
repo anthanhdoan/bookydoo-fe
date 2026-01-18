@@ -5,15 +5,14 @@ import BookmarkManagerView from './BookmarkManagerView.vue'
 
 <template>
   <div class="home-wrapper">
-    <BookmarkManagerView class="bookmark-manager-app"></BookmarkManagerView>
     <TodoView class="todo-app"></TodoView>
+    <BookmarkManagerView class="bookmark-manager-app"></BookmarkManagerView>
   </div>
 </template>
 
 <style scoped>
 .home-wrapper {
-  background-color: #ddd;
   display: flex;
-  justify-content: space-between;
+  min-height: calc(100vh - var(--navbar-height));
 }
 </style>

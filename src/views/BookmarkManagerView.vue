@@ -1,7 +1,16 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h1>This is the Bookmark Manager App</h1>
+  <div class="bookmark-manager">
+    <h1>Bookmark Manager</h1>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.bookmark-manager {
+  flex: 1;
+  box-sizing: border-box;
+  /* background-color: #fffef7; */
+  padding: 1rem;
+}
+</style>
