@@ -1,16 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import AddTodo from '@/components/todo-app/AddTodo.vue'
 import IconButton from '@/components/UI/IconButton.vue'
 import { IconButtonVariant } from '@/types/IconButton'
-
-export type UUID = string
-
-export interface ITodo {
-  id: UUID
-  title: string
-  completed: boolean
-}
+import type { ITodo, UUID } from '@/types/TodoApp'
 
 // Mocked data, replace with local storage or API calls later
 const todoList = ref<ITodo[]>([
@@ -41,10 +33,6 @@ const todoList = ref<ITodo[]>([
   },
 ])
 
-const addTodoFromChild = (todo: ITodo): void => {
-  todoList.value.push(todo)
-}
-
 const toggleComplete = (id: UUID): void => {
   const currentTodo = todoList.value.find((todo) => todo.id === id) as ITodo
   currentTodo.completed = !currentTodo.completed
@@ -60,42 +48,25 @@ const deleteTodo = (id: UUID): void => {
 </script>
 
 <template>
-  <div class="todo-app">
-    <h1>To Do app</h1>
-    <AddTodo @add-todo="addTodoFromChild"></AddTodo>
+  <ul class="todo-list">
+    <li v-for="todo in todoList" :key="todo.id" class="todo-item">
+      <input type="checkbox" class="todo-checkbox" name="todo-checkbox" :id="todo.id" :checked="todo.completed"
+        @change="toggleComplete(todo.id)" />
 
-    <ul class="todo-list">
-      <li v-for="todo in todoList" :key="todo.id" class="todo-item">
-        <input type="checkbox" class="todo-checkbox" name="todo-checkbox" :id="todo.id" :checked="todo.completed"
-          @change="toggleComplete(todo.id)" />
+      <span :class="{ completed: todo.completed }" @click="toggleComplete(todo.id)">{{
+        todo.title
+        }}</span>
 
-        <span :class="{ completed: todo.completed }" @click="toggleComplete(todo.id)">{{
-          todo.title
-          }}</span>
-
-        <div class="todo-buttons">
-          <IconButton :variant="IconButtonVariant.EDIT" class="icon-button"
-            @click="console.log('Edit Todo functionality')" />
-          <IconButton :variant="IconButtonVariant.DELETE" class="icon-button" @click="deleteTodo(todo.id)" />
-        </div>
-      </li>
-    </ul>
-  </div>
+      <div class="todo-buttons">
+        <IconButton :variant="IconButtonVariant.EDIT" class="icon-button"
+          @click="console.log('Edit Todo functionality')" />
+        <IconButton :variant="IconButtonVariant.DELETE" class="icon-button" @click="deleteTodo(todo.id)" />
+      </div>
+    </li>
+  </ul>
 </template>
 
 <style scoped>
-.todo-app {
-  box-sizing: border-box;
-  width: 500px;
-  background-color: #fff;
-  padding: 1rem;
-}
-
-.todo-list {
-  list-style: none;
-  padding: 0;
-}
-
 .todo-item {
   box-sizing: border-box;
   display: flex;
@@ -140,23 +111,5 @@ const deleteTodo = (id: UUID): void => {
   margin-left: auto;
   display: flex;
   gap: 0.3rem;
-}
-
-.icon-style {
-  font-size: 1.5em;
-  color: #fff;
-}
-
-.icon-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ff8800;
-  padding: 0;
-  border: 0;
-  height: 1.5rem;
-  width: 1.5rem;
-  border-radius: 3px;
-  cursor: pointer;
 }
 </style>

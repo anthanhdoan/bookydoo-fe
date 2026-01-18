@@ -4,7 +4,6 @@ import BookmarkManagerView from './BookmarkManagerView.vue'
 </script>
 
 <template>
-  <h1>This is the home screen</h1>
   <div class="home-wrapper">
     <BookmarkManagerView class="bookmark-manager-app"></BookmarkManagerView>
     <TodoView class="todo-app"></TodoView>
