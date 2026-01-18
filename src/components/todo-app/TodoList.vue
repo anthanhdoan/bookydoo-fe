@@ -1,66 +1,46 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import IconButton from '@/components/UI/IconButton.vue'
 import { IconButtonVariant } from '@/types/IconButton'
 import type { ITodo, UUID } from '@/types/TodoApp'
 
-// Mocked data, replace with local storage or API calls later
-const todoList = ref<ITodo[]>([
-  {
-    id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-    title: 'Extract AddTodo component',
-    completed: true,
-  },
-  {
-    id: '1e3a5f7c-2d4b-486e-8a9d-0f1e2c3d4e5f',
-    title: 'Extract TodoList component',
-    completed: false,
-  },
-  {
-    id: '9b8c7d6e-5a4b-4c3d-9e8f-7a6b5c4d3e2f',
-    title: 'Extract TodoItem component',
-    completed: false,
-  },
-  {
-    id: '3d2e1f0c-7b6a-4d3c-2e1f-0c9d8b7a6f5e',
-    title: 'Create EditTodo component',
-    completed: false,
-  },
-  {
-    id: '6a5b4c3d-2e1f-0c9d-8a7b-6f5e4d3c2b1a',
-    title: 'Make data persistent in LocalStorage or Pinia/Backend',
-    completed: false,
-  },
-])
+defineProps<{
+  todoList: ITodo[]
+}>()
 
-const toggleComplete = (id: UUID): void => {
-  const currentTodo = todoList.value.find((todo) => todo.id === id) as ITodo
-  currentTodo.completed = !currentTodo.completed
-}
+defineEmits(['toggleComplete', 'deleteTodo'])
 
-const deleteTodo = (id: UUID): void => {
-  const currentTodo = todoList.value.find((todo) => todo.id === id) as ITodo
-  const index: number = todoList.value.indexOf(currentTodo)
-  if (currentTodo) {
-    todoList.value.splice(index, 1)
-  }
-}
+const returnId = (id: UUID): UUID => id
 </script>
 
 <template>
   <ul class="todo-list">
     <li v-for="todo in todoList" :key="todo.id" class="todo-item">
-      <input type="checkbox" class="todo-checkbox" name="todo-checkbox" :id="todo.id" :checked="todo.completed"
-        @change="toggleComplete(todo.id)" />
+      <input
+        type="checkbox"
+        class="todo-checkbox"
+        name="todo-checkbox"
+        :id="todo.id"
+        :checked="todo.completed"
+        @change="$emit('toggleComplete', returnId(todo.id))"
+      />
 
-      <span :class="{ completed: todo.completed }" @click="toggleComplete(todo.id)">{{
-        todo.title
-        }}</span>
+      <span
+        :class="{ completed: todo.completed }"
+        @click="$emit('toggleComplete', returnId(todo.id))"
+        >{{ todo.title }}</span
+      >
 
       <div class="todo-buttons">
-        <IconButton :variant="IconButtonVariant.EDIT" class="icon-button"
-          @click="console.log('Edit Todo functionality')" />
-        <IconButton :variant="IconButtonVariant.DELETE" class="icon-button" @click="deleteTodo(todo.id)" />
+        <IconButton
+          :variant="IconButtonVariant.EDIT"
+          class="icon-button"
+          @click="console.log('Edit Todo functionality')"
+        />
+        <IconButton
+          :variant="IconButtonVariant.DELETE"
+          class="icon-button"
+          @click="$emit('deleteTodo', returnId(todo.id))"
+        />
       </div>
     </li>
   </ul>

@@ -1,16 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import AddTodo from '@/components/todo-app/AddTodo.vue'
-import IconButton from '@/components/UI/IconButton.vue'
-import { IconButtonVariant } from '@/types/IconButton'
-
-export type UUID = string
-
-export interface ITodo {
-  id: UUID
-  title: string
-  completed: boolean
-}
+import TodoList from '@/components/todo-app/TodoList.vue'
+import type { ITodo, UUID } from '@/types/TodoApp'
 
 // Mocked data, replace with local storage or API calls later
 const todoList = ref<ITodo[]>([
@@ -62,24 +54,8 @@ const deleteTodo = (id: UUID): void => {
 <template>
   <div class="todo-app">
     <h1>To Do app</h1>
-    <AddTodo @add-todo="addTodoFromChild"></AddTodo>
-
-    <ul class="todo-list">
-      <li v-for="todo in todoList" :key="todo.id" class="todo-item">
-        <input type="checkbox" class="todo-checkbox" name="todo-checkbox" :id="todo.id" :checked="todo.completed"
-          @change="toggleComplete(todo.id)" />
-
-        <span :class="{ completed: todo.completed }" @click="toggleComplete(todo.id)">{{
-          todo.title
-          }}</span>
-
-        <div class="todo-buttons">
-          <IconButton :variant="IconButtonVariant.EDIT" class="icon-button"
-            @click="console.log('Edit Todo functionality')" />
-          <IconButton :variant="IconButtonVariant.DELETE" class="icon-button" @click="deleteTodo(todo.id)" />
-        </div>
-      </li>
-    </ul>
+    <AddTodo @add-todo="addTodoFromChild" />
+    <TodoList :todoList="todoList" @toggle-complete="toggleComplete" @delete-todo="deleteTodo" />
   </div>
 </template>
 

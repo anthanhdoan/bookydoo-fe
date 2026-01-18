@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
-import type { ITodo } from '@/views/TodoView.vue'
 import IconButton from '@/components/UI/IconButton.vue'
 import { IconButtonVariant } from '@/types/IconButton'
+import type { ITodo } from '@/types/TodoApp'
 
-defineEmits(['add-todo'])
+defineEmits(['addTodo'])
 
 const userInput = ref('')
 
@@ -23,7 +23,7 @@ const addTodo = (): ITodo => {
 </script>
 
 <template>
-  <form @submit.prevent="$emit('add-todo', addTodo())" class="todo-add">
+  <form @submit.prevent="$emit('addTodo', addTodo())" class="todo-add">
     <input v-model="userInput" type="text" id="todo-add-input" />
     <IconButton
       :variant="IconButtonVariant.ADD"
