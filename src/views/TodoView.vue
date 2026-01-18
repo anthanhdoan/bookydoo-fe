@@ -7,6 +7,31 @@ import type { ITodo, UUID } from '@/types/TodoApp'
 // Mocked data, replace with local storage or API calls later
 const todoList = ref<ITodo[]>([
   {
+    id: '6ba7b810-9dad-11d1-80b4-00c04fd430c8',
+    title: 'Scaffold VUE project',
+    completed: true,
+  },
+  {
+    id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+    title: 'Remove extra boilerplate code',
+    completed: true,
+  },
+  {
+    id: '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed',
+    title: 'Set up routes',
+    completed: true,
+  },
+  {
+    id: '9c3e5e7f-0a1b-2c3d-4e5f-6a7b8c9d0e1f',
+    title: 'Create monolithic Todo App',
+    completed: true,
+  },
+  {
+    id: '550e8400-e29b-41d4-a716-446655440000',
+    title: 'Add styling as you go',
+    completed: true,
+  },
+  {
     id: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
     title: 'Extract AddTodo component',
     completed: true,
@@ -24,7 +49,7 @@ const todoList = ref<ITodo[]>([
   {
     id: '3d2e1f0c-7b6a-4d3c-2e1f-0c9d8b7a6f5e',
     title: 'Create EditTodo component',
-    completed: false,
+    completed: true,
   },
   {
     id: '6a5b4c3d-2e1f-0c9d-8a7b-6f5e4d3c2b1a',
@@ -50,8 +75,16 @@ const deleteTodo = (id: UUID): void => {
   }
 }
 
+const editTodo = (id: UUID, newTitle: string): void => {
+  const currentTodo = todoList.value.find((todo) => todo.id === id)
+  if (currentTodo) {
+    currentTodo.title = newTitle
+  }
+}
+
 provide('toggleComplete', toggleComplete)
 provide('deleteTodo', deleteTodo)
+provide('editTodo', editTodo)
 </script>
 
 <template>
