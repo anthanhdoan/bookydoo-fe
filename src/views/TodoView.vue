@@ -88,18 +88,27 @@ provide('editTodo', editTodo)
 </script>
 
 <template>
-  <div class="todo-app">
-    <h1>To Do app</h1>
-    <AddTodo @add-todo="addTodo" />
-    <TodoList :todoList="todoList" />
+  <div class="todo-wrapper">
+    <div class="todo-app">
+      <h1>To Do app</h1>
+      <AddTodo @add-todo="addTodo" />
+      <TodoList :todoList="todoList" />
+    </div>
   </div>
 </template>
 
 <style scoped>
+.todo-wrapper {
+  display: flex;
+  min-height: calc(100vh - var(--navbar-height));
+  padding: 0;
+  margin: 0;
+}
+
 .todo-app {
   box-sizing: border-box;
   width: 500px;
-  background-color: #fff7ee;
+  background-color: #fffaf4;
   padding: 1rem;
   border-right: 1px var(--color-text-accent) solid;
 }

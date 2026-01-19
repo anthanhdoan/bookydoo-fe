@@ -4,11 +4,15 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-    <RouterLink :to="{ name: 'home' }" class="header-appname">BookyDoo</RouterLink>
+    <RouterLink :to="{ name: 'home' }" class="header-appname"
+      >BookyDoo</RouterLink
+    >
 
     <nav class="header-nav">
-      <RouterLink :to="{ name: 'bookmark-manager' }">Bookmark Manager</RouterLink>
       <RouterLink :to="{ name: 'todo-app' }">Todo App</RouterLink>
+      <RouterLink :to="{ name: 'bookmark-manager' }"
+        >Bookmark Manager</RouterLink
+      >
     </nav>
   </header>
 

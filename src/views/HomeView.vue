@@ -5,8 +5,8 @@ import BookmarkManagerView from './BookmarkManagerView.vue'
 
 <template>
   <div class="home-wrapper">
-    <TodoView class="todo-app"></TodoView>
-    <BookmarkManagerView class="bookmark-manager-app"></BookmarkManagerView>
+    <TodoView />
+    <BookmarkManagerView />
   </div>
 </template>
 
